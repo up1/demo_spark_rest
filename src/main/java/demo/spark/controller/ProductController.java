@@ -4,7 +4,7 @@ import static spark.Spark.after;
 import static spark.Spark.exception;
 import static spark.Spark.get;
 import static spark.Spark.post;
-import static demo.spark.util.JsonUtil.*
+import static demo.spark.util.JsonUtil.*;
 import spark.ExceptionHandler;
 import spark.Filter;
 import spark.Request;
@@ -17,18 +17,6 @@ import demo.spark.util.JsonUtil;
 public class ProductController {
 
 	public ProductController(final ProductService productService) {
-		
-		get("/products", (request, response) -> productService.getAllProduct(), json());
-		
-		get("/product/:id", (request, response) -> {
-			String id = request.params(":id");
-			return productService.getProduct(id);
-		}, json());
-		
-		post("/product", (req, res) -> productService.createNewProduct(
-				req.queryParams("name"),
-				Double.valueOf(req.queryParams("price"))
-		), json());
 		
 		get("/products", new Route() {
 			public Object handle(Request request, Response response) {
